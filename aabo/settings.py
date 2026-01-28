@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-(8@q64x8wo%65ghx#ct!k
 # AVERTISSEMENT : ne pas activer DEBUG en production.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = ["*"]
 
 # Origines de confiance pour CSRF (production)
 CSRF_TRUSTED_ORIGINS = [
