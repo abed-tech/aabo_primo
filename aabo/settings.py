@@ -33,11 +33,17 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-(8@q64x8wo%65ghx#ct!k
 # AVERTISSEMENT : ne pas activer DEBUG en production.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ["*"]
+# Configuration ALLOWED_HOSTS avec nettoyage des espaces
+allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
+if allowed_hosts_env:
+    ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
+else:
+    # En développement, autoriser localhost
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com', '.railway.app', '.herokuapp.com']
 
 # Origines de confiance pour CSRF (production)
 CSRF_TRUSTED_ORIGINS = [
-    f'https://{host}' for host in ALLOWED_HOSTS if host
+    f'https://{host}' for host in ALLOWED_HOSTS if host and not host.startswith('.')
 ]
 
 
