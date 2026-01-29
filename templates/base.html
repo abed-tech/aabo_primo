@@ -45,22 +45,22 @@
       {% block contenu %}{% endblock %}
     </main>
 
-    <nav class="sticky bottom-0 z-40 bg-black/90 backdrop-blur border-t border-white/10">
-      <div class="grid grid-cols-5 text-center">
-        <a id="lien_navigation_feed" class="py-3 flex items-center justify-center text-white/60 hover:text-white transition" href="{% url 'feed' %}" aria-label="Feed">
+    <nav class="bottom-nav">
+      <div class="bottom-nav-grid">
+        <a id="lien_navigation_feed" class="bottom-nav-link" href="{% url 'feed' %}" aria-label="Feed">
           <i data-lucide="home" class="w-6 h-6"></i>
         </a>
-        <a id="lien_navigation_recherche" class="py-3 flex items-center justify-center text-white/60 hover:text-white transition" href="{% url 'recherche' %}" aria-label="Recherche">
+        <a id="lien_navigation_recherche" class="bottom-nav-link" href="{% url 'recherche' %}" aria-label="Recherche">
           <i data-lucide="search" class="w-6 h-6"></i>
         </a>
-        <a id="lien_navigation_publier" class="py-3 flex items-center justify-center text-white/60 hover:text-white transition" href="{% url 'publier_bien' %}" aria-label="Publier">
+        <a id="lien_navigation_publier" class="bottom-nav-link" href="{% url 'publier_bien' %}" aria-label="Publier">
           <i data-lucide="plus-circle" class="w-6 h-6"></i>
         </a>
-        <a id="lien_navigation_messages" class="py-3 relative flex items-center justify-center text-white/60 hover:text-white transition" href="{% url 'liste_messages' %}" aria-label="Messagerie">
+        <a id="lien_navigation_messages" class="bottom-nav-link" href="{% url 'liste_messages' %}" aria-label="Messagerie">
           <i data-lucide="message-circle" class="w-6 h-6"></i>
-          <span id="badge_messages_non_lus" class="hidden absolute top-1 right-3 min-w-5 h-5 px-1 rounded-full bg-blue-500 text-white text-[11px] leading-5">0</span>
+          <span id="badge_messages_non_lus" class="notification-badge hidden">0</span>
         </a>
-        <a id="lien_navigation_profil" class="py-3 flex items-center justify-center text-white/60 hover:text-white transition" href="{% url 'profil' %}" aria-label="Profil">
+        <a id="lien_navigation_profil" class="bottom-nav-link" href="{% url 'profil' %}" aria-label="Profil">
           <i data-lucide="user" class="w-6 h-6"></i>
         </a>
       </div>
