@@ -17,6 +17,16 @@ from .models import Conversation, Message, Publication, Utilisateur
 from .services import generer_propositions_noms_utilisateur
 
 
+def page_404(request, exception):
+    """Page d'erreur 404 personnalisée"""
+    return render(request, '404.html', status=404)
+
+
+def page_500(request):
+    """Page d'erreur 500 personnalisée"""
+    return render(request, '500.html', status=500)
+
+
 @require_http_methods(['GET'])
 def afficher_index(request):
     return render(request, 'index.html')

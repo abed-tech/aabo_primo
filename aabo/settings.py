@@ -33,18 +33,48 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-(8@q64x8wo%65ghx#ct!k
 # AVERTISSEMENT : ne pas activer DEBUG en production.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-# Configuration ALLOWED_HOSTS avec nettoyage des espaces
+# Configuration ALLOWED_HOSTS avec support universel des plateformes
 allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
 if allowed_hosts_env:
     ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
 else:
-    # En développement, autoriser localhost
-    ALLOWED_HOSTS =  'https://aabo-primo-4.onrender.com', 
+    # Fallback : support automatique de toutes les plateformes de déploiement
+    ALLOWED_HOSTS = [
+        'localhost',
+        '127.0.0.1',
+        '.onrender.com',
+        '.railway.app',
+        '.herokuapp.com',
+        '.vercel.app',
+        '.netlify.app',
+        '.fly.dev',
+        '.replit.dev',
+        '.pythonanywhere.com',
+    ]
 
 # Origines de confiance pour CSRF (production)
-CSRF_TRUSTED_ORIGINS = [
-    f'https://aabo-primo-4.onrender.com' for host in ALLOWED_HOSTS if host and not host.startswith('.')
-]
+# Génération automatique pour tous les domaines wildcard
+CSRF_TRUSTED_ORIGINS = []
+for host in ALLOWED_HOSTS:
+    if host.startswith('.'):
+        # Pour les wildcards, on ne peut pas les ajouter directement
+        # Ils seront gérés par le middleware CSRF de Django
+        continue
+    elif host not in ['localhost', '127.0.0.1']:
+        CSRF_TRUSTED_ORIGINS.append(f'https://{host}')
+
+# Ajouter les domaines wildcard pour CSRF (format spécial)
+if not allowed_hosts_env:
+    CSRF_TRUSTED_ORIGINS.extend([
+        'https://*.onrender.com',
+        'https://*.railway.app',
+        'https://*.herokuapp.com',
+        'https://*.vercel.app',
+        'https://*.netlify.app',
+        'https://*.fly.dev',
+        'https://*.replit.dev',
+        'https://*.pythonanywhere.com',
+    ])
 
 
 # Définition des applications
