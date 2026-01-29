@@ -39,11 +39,11 @@ if allowed_hosts_env:
     ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
 else:
     # En développement, autoriser localhost
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com', '.railway.app', '.herokuapp.com']
+    ALLOWED_HOSTS =  'https://aabo-primo-4.onrender.com', 
 
 # Origines de confiance pour CSRF (production)
 CSRF_TRUSTED_ORIGINS = [
-    f'https://{host}' for host in ALLOWED_HOSTS if host and not host.startswith('.')
+    f'https://https://aabo-primo-4.onrender.com 
 ]
 
 
